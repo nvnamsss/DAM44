@@ -11,6 +11,5 @@ namespace DAM.Cores.Query
         //LinQ Where method, juts an example
         IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate);
         IDbObject Sum<TSource>(IEnumerable<TSource> source);
-        
     }
 }

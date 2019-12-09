@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\All Project\\Git\\design-pattern\\DAM\\DAMTest\\DAMTest.csproj": {}
+    "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj": {}
   },
   "projects": {
-    "D:\\All Project\\Git\\design-pattern\\DAM\\DAMTest\\DAMTest.csproj": {
+    "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\All Project\\Git\\design-pattern\\DAM\\DAMTest\\DAMTest.csproj",
+        "projectUniqueName": "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj",
         "projectName": "DAMTest",
-        "projectPath": "D:\\All Project\\Git\\design-pattern\\DAM\\DAMTest\\DAMTest.csproj",
-        "packagesPath": "C:\\Users\\Crom\\.nuget\\packages\\",
-        "outputPath": "D:\\All Project\\Git\\design-pattern\\DAM\\DAMTest\\obj\\",
+        "projectPath": "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj",
+        "packagesPath": "C:\\Users\\ViNam\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Git\\DAM44\\DAMTest\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Crom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ViNam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,16 +51,23 @@
               "version": "[15.9.0, )"
             },
             "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

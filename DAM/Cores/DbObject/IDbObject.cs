@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAM.Cores.DbObject
 {
-    interface IDbObject
+    public interface IDbObject
     {
     }
 }
