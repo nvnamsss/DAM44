@@ -29,7 +29,7 @@ namespace DAM.Cores.Connection
 
         public abstract void Connect(string url);
         public abstract void Disconnect();
-
+        protected StringBuilder connectionString;
         //protected virtual void SetState(ConnectionState state)
         //{
         //    if (state != ConnectionState)

@@ -5828,9 +5828,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj",
-      "projectName": "DAMTest",
-      "projectPath": "D:\\Work\\Git\\DAM44\\DAMTest\\DAMTest.csproj",
+      "projectUniqueName": "D:\\Work\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
+      "projectName": "DAM.Tests.Unit",
+      "projectPath": "D:\\Work\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
       "packagesPath": "C:\\Users\\ViNam\\.nuget\\packages\\",
       "outputPath": "D:\\Work\\Git\\DAM44\\DAMTest\\obj\\",
       "projectStyle": "PackageReference",

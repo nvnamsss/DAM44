@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAM", "DAM\DAM.csproj", "{B862C30A-3D39-4AC1-B365-AA5D19FF31C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAM", "DAM\DAM.csproj", "{B862C30A-3D39-4AC1-B365-AA5D19FF31C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAMTest", "DAMTest\DAMTest.csproj", "{48AE72A3-09D1-4093-9254-F93AFCF0A23D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAM.Tests.Unit", "DAMTest\DAM.Tests.Unit.csproj", "{48AE72A3-09D1-4093-9254-F93AFCF0A23D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

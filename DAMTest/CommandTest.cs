@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DAMTest
+namespace DAM.Tests.Unit
 {
     /// <summary>
     /// Example test class
