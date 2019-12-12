@@ -12,8 +12,16 @@ namespace DAM.Cores.Connection
             {
                 return _state;
             }
+            protected set
+            {
+                if (value != _state)
+                {
+                    var e = new Event.Connection.StateChangedEventArgs(value, ConnectionState);
+                    _state = value;
+                    StateChanged?.Invoke(this, e);
+                }
+            }
         }
-
         private ConnectionState _state;
         public event OnConnectHandler OnConnect;
         public event OnConnectHandler OnDisconnect;
@@ -22,14 +30,14 @@ namespace DAM.Cores.Connection
         public abstract void Connect(string url);
         public abstract void Disconnect();
 
-        protected virtual void SetState(ConnectionState state)
-        {
-            if (state != _state)
-            {
-                var e = new Event.Connection.StateChangedEventArgs(state, _state);
-                _state = state;
-                StateChanged?.Invoke(this, e);
-            }
-        }
+        //protected virtual void SetState(ConnectionState state)
+        //{
+        //    if (state != ConnectionState)
+        //    {
+        //        var e = new Event.Connection.StateChangedEventArgs(state, ConnectionState);
+        //        ConnectionState = state;
+        //        StateChanged?.Invoke(this, e);
+        //    }
+        //}
     }
 }

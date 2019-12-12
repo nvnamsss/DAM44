@@ -14,7 +14,6 @@ namespace DAM.SQL
             string connectionString = "Data Source=(local);Initial Catalog=Northwind;"
             + "Integrated Security=true";
             _connection = new SqlConnection(connectionString);
-
         }
 
         public override void Disconnect()

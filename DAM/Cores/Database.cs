@@ -25,6 +25,20 @@ namespace DAM.Cores
             throw new NotImplementedException();
         }
 
+        public int Execute(string query, params object[] args)
+        {
+            try
+            {
+                Command.Execute(query, args);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            throw new NotImplementedException();
+        }
+
         public IDbObject Sum<TSource>(IEnumerable<TSource> source)
         {
             throw new NotImplementedException();
