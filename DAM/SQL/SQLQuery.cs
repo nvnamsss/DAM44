@@ -1,28 +1,16 @@
-﻿using DAM.Cores.Connection;
-using DAM.Cores.DbObject;
+﻿using DAM.Cores.DbObject;
 using DAM.Cores.Query;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAM.Cores
+namespace DAM.SQL
 {
-    public class Database : ICommand, IQuery
+    public class SQLQuery : IQuery
     {
-        protected ICommand Command { get; }
-        public T Execute<T>(string query, params object[] args)
+        public SQLQuery()
         {
-            try
-            {
-                Command.Execute<T>(query, args);
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-
-            throw new NotImplementedException();
         }
 
         public IDbObject Sum<TSource>(IEnumerable<TSource> source)
