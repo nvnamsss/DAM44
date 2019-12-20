@@ -1,7 +1,0 @@
-D:\Work\Git\DAM44\DAM\bin\Debug\netcoreapp2.1\DAM.deps.json
-D:\Work\Git\DAM44\DAM\bin\Debug\netcoreapp2.1\DAM.runtimeconfig.json
-D:\Work\Git\DAM44\DAM\bin\Debug\netcoreapp2.1\DAM.runtimeconfig.dev.json
-D:\Work\Git\DAM44\DAM\bin\Debug\netcoreapp2.1\DAM.dll
-D:\Work\Git\DAM44\DAM\obj\Debug\netcoreapp2.1\DAM.csprojAssemblyReference.cache
-D:\Work\Git\DAM44\DAM\obj\Debug\netcoreapp2.1\DAM.AssemblyInfoInputs.cache
-D:\Work\Git\DAM44\DAM\obj\Debug\netcoreapp2.1\DAM.AssemblyInfo.cs
