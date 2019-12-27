@@ -9,6 +9,7 @@ namespace DAM.Cores
 {
     public class Database : ICommand, IQuery
     {
+        public IConnection Connection { get; }
         protected ICommand Command { get; }
         public T Execute<T>(string query, params object[] args)
         {

@@ -7,6 +7,7 @@ namespace DAM.SQL
 {
     public class SQLCommand : ICommand
     {
+        SQLConnection Connection;
         public int Execute(string query, params object[] args)
         {
             throw new NotImplementedException();

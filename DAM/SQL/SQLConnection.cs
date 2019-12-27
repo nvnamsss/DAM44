@@ -17,15 +17,20 @@ namespace DAM.SQL
             connectionString.Append("database=" + database);
             connectionString.Append("server=" + server);
             _connection = new SqlConnection(connectionString.ToString());
-
         }
         public override void Connect(string url)
         {
             _connection.Open();
         }
 
+        public override void Connect()
+        {
+            _connection.Open();
+        }
+
         public override void Disconnect()
         {
+            _connection.Close();
         }
     }
 }
