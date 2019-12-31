@@ -5823,17 +5823,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ViNam\\.nuget\\packages\\": {}
+    "C:\\Users\\ViNam\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
+      "projectUniqueName": "D:\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
       "projectName": "DAM.Tests.Unit",
-      "projectPath": "D:\\Work\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
+      "projectPath": "D:\\Git\\DAM44\\DAMTest\\DAM.Tests.Unit.csproj",
       "packagesPath": "C:\\Users\\ViNam\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Git\\DAM44\\DAMTest\\obj\\",
+      "outputPath": "D:\\Git\\DAM44\\DAMTest\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\ViNam\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
