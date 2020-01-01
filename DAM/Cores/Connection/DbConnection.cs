@@ -24,6 +24,7 @@ namespace DAM.Cores.Connection
         }
         private ConnectionState _state;
         public event OnConnectHandler OnConnect;
+        public event OnErrorHandler OnError;
         public event OnConnectHandler OnDisconnect;
         public event StateChangeHandler StateChanged;
 
@@ -31,6 +32,23 @@ namespace DAM.Cores.Connection
         public abstract void Connect();
         public abstract void Disconnect();
         protected StringBuilder connectionString;
+        protected System.Data.Common.DbConnection _connection;
+        protected System.Data.Common.DbCommand _command;
+
+        protected virtual void OnConnectInvoke()
+        {
+            OnConnect?.Invoke(this);
+        }
+
+        protected virtual void OnErrorInvoke(Exception e)
+        {
+            OnError?.Invoke(this, e);
+        }
+
+        protected virtual void OnDisconnectInvoke()
+        {
+            OnDisconnect?.Invoke(this);
+        }
         //protected virtual void SetState(ConnectionState state)
         //{
         //    if (state != ConnectionState)

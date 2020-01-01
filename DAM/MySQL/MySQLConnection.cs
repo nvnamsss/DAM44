@@ -2,13 +2,13 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DAM.MySQL
 {
     public class MySQLConnection : DbConnection
     {
-        private MySqlConnection _connection;
         public MySQLConnection(string server, string username, string password, string database)
         {
             connectionString = new StringBuilder();
@@ -17,17 +17,33 @@ namespace DAM.MySQL
             connectionString.Append("pwd=" + password + ";");
             connectionString.Append("database=" + database);
             _connection = new MySqlConnection(connectionString.ToString());
+            _command = new MySqlCommand();
+            _command.Connection = _connection;
         }
 
         public override void Connect(string url)
         {
-            _connection.ConnectionString = url;
-            _connection.Open();
+            try
+            {
+                _connection.ConnectionString = url;
+                _connection.Open();
+            }
+            catch (Exception e)
+            {
+                OnErrorInvoke(e);
+            }
         }
 
         public override void Connect()
         {
-            _connection.Open();
+            try
+            {
+                _connection.Open();
+            }
+            catch (Exception e)
+            {
+                OnErrorInvoke(e);
+            }
         }
 
         public override void Disconnect()

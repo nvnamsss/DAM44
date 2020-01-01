@@ -6,11 +6,13 @@ using System.Text;
 namespace DAM.Cores.Connection
 {
     public delegate void OnConnectHandler(IConnection sender);
+    public delegate void OnErrorHandler(IConnection sender, Exception e);
     public delegate void OnDisconnectHandler(IConnection sender);
     public delegate void StateChangeHandler(IConnection state, StateChangedEventArgs e);
     public interface IConnection
     {
         event OnConnectHandler OnConnect;
+        event OnErrorHandler OnError;
         event OnConnectHandler OnDisconnect;
         event StateChangeHandler StateChanged;
         ConnectionState ConnectionState { get; }

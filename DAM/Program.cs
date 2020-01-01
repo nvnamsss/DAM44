@@ -24,7 +24,16 @@ namespace DAM
             string database = "mysql";
             MySQL.MySQLConnection connection = new MySQL.MySQLConnection(server, username, password, database);
             connection.Connect();
+            MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
+            command.Connection = connection._connection;    
+            command.CommandText = "SELECT * FROM db";
+            var reader = command.ExecuteReader();
 
+            while (reader.Read())
+            {
+                Console.WriteLine(reader[0] + " -- " + reader[1]);
+            }
+            reader.Close();
             QuitEvent.WaitOne();
         }
 
