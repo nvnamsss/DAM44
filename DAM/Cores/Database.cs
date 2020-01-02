@@ -7,10 +7,9 @@ using System.Text;
 
 namespace DAM.Cores
 {
-    public class Database : ICommand, IQuery
+    public class Database : IQuery
     {
         public IConnection Connection { get; }
-        protected ICommand Command { get; }
         public T Execute<T>(string query, params object[] args)
         {
             try
