@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAM.Cores.DbObject
+namespace DAM.Cores.Objects
 {
     public class DatabaseObject
     {

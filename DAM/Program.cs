@@ -34,6 +34,9 @@ namespace DAM
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
             }
             reader.Close();
+
+            Cores.Database db = new Cores.Database();
+            db.Students.Insert(null);
             QuitEvent.WaitOne();
         }
 

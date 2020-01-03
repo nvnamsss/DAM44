@@ -34,7 +34,7 @@ namespace DAM.Cores.Connection
         protected StringBuilder connectionString;
         protected System.Data.Common.DbConnection _connection;
         protected System.Data.Common.DbCommand _command;
-
+        protected System.Data.Common.DbTransaction _transaction;
         protected virtual void OnConnectInvoke()
         {
             OnConnect?.Invoke(this);
@@ -49,6 +49,12 @@ namespace DAM.Cores.Connection
         {
             OnDisconnect?.Invoke(this);
         }
+
+        public virtual void SendRequest(string query)
+        {
+
+        }
+
         //protected virtual void SetState(ConnectionState state)
         //{
         //    if (state != ConnectionState)
