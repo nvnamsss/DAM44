@@ -8,5 +8,6 @@ namespace DAM.Cores.Objects
     {
         string Name { get; set; }
         Database Database { get; set; }
+        T Deserialize<T>() where T : new();
     }
 }

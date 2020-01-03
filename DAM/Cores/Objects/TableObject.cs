@@ -4,11 +4,9 @@ using System.Text;
 
 namespace DAM.Cores.Objects
 {
-    public class TableObject : IDbObject
+    public class TableObject : DbObject
     {
-        public string Name { get; set; }
-        public Database Database { get; set; }
-
+        
         public void Insert(ColumnObject column)
         {
             if (Database.Connection == null)
@@ -22,8 +20,8 @@ namespace DAM.Cores.Objects
             }
 
             StringBuilder query = new StringBuilder();
-            query.Append("INSERT INTO");
-            query.Append();
+            query.Append("INSERT INTO ");
+            query.Append(Name);
             Database.Connection.SendRequest(query);
         }
 
