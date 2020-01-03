@@ -18,16 +18,16 @@ namespace DAM.MySQL
         public event StateChangeHandler StateChanged;
 
         public MySQL(string server, string username, string pwd, string database)
+           : base(server, username, pwd, database) { }
+        
+
+        public override void Connect()
         {
             _connection = new MySqlConnection("server=localhost;uid=root;pwd=;database=dam");
             _connection.Open();
+
             _command = new MySqlCommand();
             _command.Connection = _connection;
-        }
-
-        public override void Connect(string url)
-        {
-            return;
         }
 
         public override void Disconnect()
@@ -35,26 +35,26 @@ namespace DAM.MySQL
             throw new NotImplementedException();
         }
 
-        public override void Insert(string table, string id, object data)
+        public override void Insert(string table, object data)
         {
-            string query = "INSERT INTO dam_table values (12, 'asd')";
+            string query = "INSERT INTO dam_table values (123, 'asd')";
             _command.CommandText = query;
             _command.ExecuteReader();
         }
 
-        public override IDbObject Sum<TSource>(IEnumerable<TSource> source)
-        {
-            throw new NotImplementedException();
-        }
+        //public override IDbObject Sum<TSource>(IEnumerable<TSource> source)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override IDbObject Where()
-        {
-            throw new NotImplementedException();
-        }
+        //public override IDbObject Where()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public override IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
