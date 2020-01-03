@@ -23,10 +23,10 @@ namespace DAM.SQL
             _connection.Open();
         }
 
-        public override void Connect()
-        {
-            _connection.Open();
-        }
+        //public override void Connect()
+        //{
+        //    _connection.Open();
+        //}
 
         public override void Disconnect()
         {

@@ -6,5 +6,7 @@ namespace DAM.Cores.DbObject
 {
     public interface IDbObject
     {
+        void Insert();
+        void Update();
     }
 }

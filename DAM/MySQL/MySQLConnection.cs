@@ -12,11 +12,14 @@ namespace DAM.MySQL
         public MySQLConnection(string server, string username, string password, string database)
         {
             connectionString = new StringBuilder();
+
             connectionString.Append("server=" + server + ";");
             connectionString.Append("uid=" + username + ";");
             connectionString.Append("pwd=" + password + ";");
             connectionString.Append("database=" + database);
+
             _connection = new MySqlConnection(connectionString.ToString());
+
             _command = new MySqlCommand();
             _command.Connection = _connection;
         }
@@ -34,17 +37,17 @@ namespace DAM.MySQL
             }
         }
 
-        public override void Connect()
-        {
-            try
-            {
-                _connection.Open();
-            }
-            catch (Exception e)
-            {
-                OnErrorInvoke(e);
-            }
-        }
+        //public override void Connect()
+        //{
+        //    try
+        //    {
+        //        _connection.Open();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        OnErrorInvoke(e);
+        //    }
+        //}
 
         public override void Disconnect()
         {

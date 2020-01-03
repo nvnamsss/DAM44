@@ -13,6 +13,11 @@ namespace DAM.SQL
 
         }
 
+        public void Insert(string table, string id, object data)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDbObject Sum<TSource>(IEnumerable<TSource> source)
         {
             throw new NotImplementedException();

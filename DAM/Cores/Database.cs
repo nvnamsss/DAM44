@@ -1,58 +1,58 @@
 ﻿using DAM.Cores.Connection;
 using DAM.Cores.DbObject;
 using DAM.Cores.Query;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAM.Cores
 {
-    public class Database : ICommand, IQuery
+    public abstract class Database : IConnection, IQuery
     {
-        public IConnection Connection { get; }
-        protected ICommand Command { get; }
-        public T Execute<T>(string query, params object[] args)
-        {
-            try
-            {
-                Command.Execute<T>(query, args);
-            }
-            catch (Exception)
-            {
+        protected System.Data.Common.DbConnection _connection;
+        protected System.Data.Common.DbCommand _command;
 
-                throw;
-            }
+        public ConnectionState ConnectionState => throw new NotImplementedException();
 
-            throw new NotImplementedException();
-        }
+        public event OnConnectHandler OnConnect;
+        public event OnErrorHandler OnError;
+        public event OnConnectHandler OnDisconnect;
+        public event StateChangeHandler StateChanged;
 
-        public int Execute(string query, params object[] args)
-        {
-            try
-            {
-                Command.Execute(query, args);
-            }
-            catch (Exception)
-            {
+        public abstract void Connect(string url);
 
-                throw;
-            }
-            throw new NotImplementedException();
-        }
+        public abstract void Disconnect();
 
-        public IDbObject Sum<TSource>(IEnumerable<TSource> source)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Insert(string table, string id, object data);
 
-        public IDbObject Where()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IDbObject Sum<TSource>(IEnumerable<TSource> source);
+
+
+        public abstract IDbObject Where();
+
+
+        public abstract IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate);
+      
+
+        //public IConnection Connection { get; }
+
+        //public abstract void Insert(string table, string id, object data);
+
+        //public IDbObject Sum<TSource>(IEnumerable<TSource> source)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public IDbObject Where()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

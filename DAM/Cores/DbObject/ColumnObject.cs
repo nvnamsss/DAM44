@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAM.Cores.DbObject
 {
-    public class ColumnObject : IDbObject
+    public class ColumnObject
     {
     }
 }

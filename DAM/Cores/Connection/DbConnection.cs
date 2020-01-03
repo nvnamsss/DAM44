@@ -29,7 +29,7 @@ namespace DAM.Cores.Connection
         public event StateChangeHandler StateChanged;
 
         public abstract void Connect(string url);
-        public abstract void Connect();
+        //public abstract void Connect();
         public abstract void Disconnect();
         protected StringBuilder connectionString;
         protected System.Data.Common.DbConnection _connection;

@@ -6,6 +6,5 @@ namespace DAM.Cores.Provider
 {
     public class MySqlProvider : DatabaseProvider
     {
-        
     }
 }
