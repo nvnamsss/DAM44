@@ -49,8 +49,9 @@ namespace DAM
 
                 Console.WriteLine(s);
             }
+            reader.Close();
             TestRow row = new TestRow();
-            row.Test();
+            row.Test(connection);
             //row.name = "abc";
             //row.host = "local";
             //row.port = 3000;

@@ -6,10 +6,10 @@ namespace DAM.Cores.Objects
 {
     public class TableObject : DbObject
     {
-        public List<RowObject> Rows { get; }
+        protected List<RowObject> Rows { get; }
         public TableObject()
         {
-
+            Rows = new List<RowObject>();
         }
 
         public void Update<T>(T originalObj, T newObj)
@@ -32,13 +32,13 @@ namespace DAM.Cores.Objects
                 update += entry.Key + "=" + entry.Value + " AND ";
             }
             update = update.Remove(update.LastIndexOf("AND"));
+            Console.WriteLine(update);
 
             Connection.Execute(update);
-            Console.WriteLine(update);
         }
 
 
-        public void Insert(RowObject row)
+        public int Insert(RowObject row)
         {
             if (Connection == null)
             {
@@ -50,14 +50,52 @@ namespace DAM.Cores.Objects
                 throw new Exception("Connection is closed");
             }
 
-            StringBuilder query = new StringBuilder();
-            query.Append("INSERT INTO ");
-            query.Append(Name);
-            query.Append(row.ToString());
+            StringBuilder command = new StringBuilder();
+            string fields = string.Empty;
+            string values = string.Empty;
+            foreach (var entry in row.Fields)
+            {
+                fields += entry.Key + ",";
+                if (entry.Value is string)
+                {
+                    values += "\"" + entry.Value + "\"" + ",";
+                }
+                else
+                {
+                    values += entry.Value + ",";
+                }
+            }
+            fields = fields.Remove(fields.LastIndexOf(","));
+            values = values.Remove(values.LastIndexOf(","));
+            command.Append("INSERT INTO ");
+            command.Append(Name);
+            command.AppendLine("(" + fields + ") ");
+            command.Append("VALUES (" + values + ")");
+            Console.WriteLine("Command:"+command);
 
-            Connection.Query(query.ToString());
+            int affected = Connection.Execute(command.ToString());
+
+            if (affected > 0)
+            {
+                Rows.Add(row);
+                row.Parent = this;
+            }
+
+            return affected;
         }
 
-        
+        public int Delete(RowObject row)
+        {
+            StringBuilder command = new StringBuilder();
+            int affected = Connection.Execute(command.ToString());
+
+            if (affected > 0)
+            {
+                Rows.Remove(row);
+            }
+
+            return affected;
+        }
+
     }
 }

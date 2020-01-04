@@ -1,4 +1,5 @@
 ﻿using DAM.Cores.Attributes;
+using DAM.Cores.Connection;
 using DAM.Cores.Objects;
 using System;
 using System.Collections.Generic;
@@ -21,15 +22,20 @@ namespace DAM
 
         }
 
-        public void Test()
+        public void Test(DbConnection connection)
         {
             RowObject row = new RowObject();
-            row.Fields.Add("Server_name", "123");
+            //row.Fields.Add("Server_name", "123");
             row.Fields.Add("Host", "localhost");
             row.Fields.Add("Port", 1900);
 
             TestRow test = row.Deserialize<TestRow>();
             Console.WriteLine(test);
+
+            TableObject table = new TableObject();
+            table.Name = "servers";
+            table.Connection = connection;
+            table.Insert(row);
         }
 
         public override string ToString()

@@ -66,6 +66,7 @@ namespace DAM.Cores.Connection
                 }
             }
 
+            reader.Close();
             return data;
         }
 
