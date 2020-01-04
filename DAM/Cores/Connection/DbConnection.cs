@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAM.Cores.Query;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -50,10 +51,30 @@ namespace DAM.Cores.Connection
             OnDisconnect?.Invoke(this);
         }
 
-        public virtual void SendRequest(string query)
+        public virtual QueryData Query(string query)
         {
+            QueryData data = new QueryData();
+            _command.CommandText = query;
+            System.Data.Common.DbDataReader reader = _command.ExecuteReader();
 
+            while (reader.Read())
+            {
+                for (int loop = 0; loop < reader.FieldCount; loop++)
+                {
+                    string name = reader.GetName(loop);
+                    data.Add(name, reader[loop]);
+                }
+            }
+
+            return data;
         }
+
+        public virtual int Execute(string command)
+        {
+            _command.CommandText = command;
+            return _command.ExecuteNonQuery();
+        }
+
 
         //protected virtual void SetState(ConnectionState state)
         //{

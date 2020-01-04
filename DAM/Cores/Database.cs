@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAM.Cores
 {
-    public class Database : DbObject, IQuery
+    public class Database
     {
         public DbConnection Connection { get; }
         public TableObject Students;
@@ -32,5 +32,7 @@ namespace DAM.Cores
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

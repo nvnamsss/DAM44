@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -23,11 +24,37 @@ namespace DAM
             string password = "";
             string database = "mysql";
 
+            MySQL.MySQLConnection connection = new MySQL.MySQLConnection(server, username, password, database);
+            connection.Connect();
+            MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
+            command.Connection = connection.connection;
+
+            command.CommandText = "SELECT * FROM global_priv";
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string s = string.Empty;
+                s = s + reader["host"] + "-";
+                s = s + reader["User"];
+                var e = reader.GetEnumerator();
+                //foreach (var entry in reader)
+                //{
+                //    Dictionary<string, string> dic = entry as Dictionary<string, string>;
+
+                //}
+                for (int loop = 0; loop < reader.FieldCount; loop++)
+                {
+                    s = s + reader.GetName(loop) + ":" + reader[loop] + "-";
+                }
+
+                Console.WriteLine(s);
+            }
             TestRow row = new TestRow();
-            row.name = "abc";
-            row.host = "local";
-            row.port = 3000;
-            row.Update();
+            row.Test();
+            //row.name = "abc";
+            //row.host = "local";
+            //row.port = 3000;
+            //row.Update();
             QuitEvent.WaitOne();
         }
 

@@ -9,6 +9,13 @@ namespace DAM.MySQL
 {
     public class MySQLConnection : DbConnection
     {
+        public MySqlConnection connection
+        {
+            get
+            {
+                return _connection as MySqlConnection;
+            }
+        }
         public MySQLConnection(string server, string username, string password, string database)
         {
             connectionString = new StringBuilder();

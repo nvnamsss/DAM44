@@ -6,23 +6,17 @@ namespace DAM.Cores.Objects
 {
     public class TableObject : DbObject
     {
-        public Database Database
-        {
-            get
-            {
-                return Parent as Database;
-            }
-        }
+        public List<RowObject> Rows { get; }
         public TableObject()
         {
 
         }
 
-        public void Update(object originalObj, object newObj)
+        public void Update<T>(T originalObj, T newObj)
         {
             string update = string.Empty;
-            Dictionary<string, string> originalFields = RowObject.GetFields(newObj);
-            Dictionary<string, string> newFields = RowObject.GetFields(newObj);
+            Dictionary<string, object> originalFields = RowObject.GetFields(originalObj);
+            Dictionary<string, object> newFields = RowObject.GetFields(newObj);
 
             //update += "UPDATE " + Parent.Name + " ";
             update += "SET ";
@@ -38,23 +32,20 @@ namespace DAM.Cores.Objects
                 update += entry.Key + "=" + entry.Value + " AND ";
             }
             update = update.Remove(update.LastIndexOf("AND"));
-            
+
+            Connection.Execute(update);
             Console.WriteLine(update);
         }
 
-        public override string GetProperties()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Insert(RowObject row)
         {
-            if (Database.Connection == null)
+            if (Connection == null)
             {
                 throw new Exception("Connection is null");
             }
 
-            if (Database.Connection.ConnectionState == Connection.ConnectionState.Closed)
+            if (Connection.ConnectionState == Cores.Connection.ConnectionState.Closed)
             {
                 throw new Exception("Connection is closed");
             }
@@ -64,7 +55,7 @@ namespace DAM.Cores.Objects
             query.Append(Name);
             query.Append(row.ToString());
 
-            Database.Connection.SendRequest(query.ToString());
+            Connection.Query(query.ToString());
         }
 
         
