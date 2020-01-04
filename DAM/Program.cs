@@ -22,21 +22,12 @@ namespace DAM
             string username = "root";
             string password = "";
             string database = "mysql";
-            MySQL.MySQLConnection connection = new MySQL.MySQLConnection(server, username, password, database);
-            connection.Connect();
-            MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
-            command.Connection = connection._connection;    
-            command.CommandText = "SELECT * FROM db";
-            var reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                Console.WriteLine(reader[0] + " -- " + reader[1]);
-            }
-            reader.Close();
-
-            Cores.Database db = new Cores.Database();
-            db.Students.Insert(null);
+            TestRow row = new TestRow();
+            row.name = "abc";
+            row.host = "local";
+            row.port = 3000;
+            row.Update();
             QuitEvent.WaitOne();
         }
 

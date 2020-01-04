@@ -10,7 +10,7 @@ namespace DAM.Cores.Objects
         [System.ComponentModel.Description]
         public string Name { get; set; }
         public Database Database { get; set; }
-
+        protected DbObject Parent { get; set; }
         public virtual T Deserialize<T>() where T: new()
         {
             T obj = new T();

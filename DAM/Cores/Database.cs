@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAM.Cores
 {
-    public class Database : IQuery
+    public class Database : DbObject, IQuery
     {
         public DbConnection Connection { get; }
         public TableObject Students;
