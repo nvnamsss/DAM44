@@ -83,7 +83,13 @@ namespace DAM.Cores.Objects
                   
                     if (prop.CanWrite)
                     {
-                        prop.SetValue(t, Fields[entry.Key]);
+                        try
+                        {
+                            prop.SetValue(t, Fields[entry.Key]);
+                        }
+                        catch (Exception e)
+                        {
+                        }
                     }
                 }
             }

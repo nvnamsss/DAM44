@@ -74,6 +74,22 @@ namespace DAM
                 Console.WriteLine("[TestSelect] - " + item);
             }
         }
+
+        public void TestDeserialize(DbConnection connection)
+        {
+            TableObject table = new TableObject();
+            table.Name = "servers";
+            table.Connection = connection;
+
+            RowObject row = new RowObject();
+            row.Fields.Add("host", "localhost");
+
+            IEnumerable<TestRow> t = table.Select<TestRow>(row);
+            foreach (var item in t)
+            {
+                Console.WriteLine("[TestDeserialize] - " + item);
+            }
+        }
     }
 
 }

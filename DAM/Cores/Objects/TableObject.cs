@@ -90,15 +90,29 @@ namespace DAM.Cores.Objects
             for (int loop = 0; loop < data.Affected; loop++)
             {
                 RowObject r = new RowObject();
-                foreach (var entry in rows[loop].Data)
+                foreach (var entry in data[loop].Data)
                 {
-                    r.Fields.Add(entry.Key, entry.Key);
+                    r.Fields.Add(entry.Key, entry.Value);
                 }
 
                 rows.Add(r);
             }
 
             return rows;
+        }
+
+        public IEnumerable<T> Select<T>(RowObject row) where T : new()
+        {
+            List<T> ts = new List<T>();
+            IEnumerable<RowObject> rows = Select(row);
+
+            foreach (var item in rows)
+            {
+                T t = item.Deserialize<T>();
+                ts.Add(t);
+            }
+
+            return ts;
         }
 
         public int Delete(RowObject row)

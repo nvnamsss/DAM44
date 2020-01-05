@@ -16,7 +16,7 @@ namespace DAM.Cores
         {
             Connection = connection;
 
-            string command = "SHOW DATABASES";
+            string command = "SHOW TABLES";
             Tables = new Dictionary<string, TableObject>();
             QueryData data = Connection.Query(command);
             for (int loop = 0; loop < data.Affected; loop++)

@@ -25,12 +25,12 @@ namespace DAM
         public void Test(DbConnection connection)
         {
             RowObject row = new RowObject();
-            //row.Fields.Add("Server_name", "123");
+            row.Fields.Add("Server_name", "123");
             row.Fields.Add("Host", "localhost");
             row.Fields.Add("Port", 1900);
 
             TestRow test = row.Deserialize<TestRow>();
-            Console.WriteLine(test);
+            Console.WriteLine("[TestRow] - " + test);
 
             TableObject table = new TableObject();
             table.Name = "servers";
