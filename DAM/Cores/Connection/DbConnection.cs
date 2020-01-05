@@ -86,11 +86,11 @@ namespace DAM.Cores.Connection
 
             while (reader.Read())
             {
-                Objects.RowObject row = new Objects.RowObject();
+                Objects.DbObject row = new Objects.RowObject();
                 for (int loop = 0; loop < reader.FieldCount; loop++)
                 {
                     string name = reader.GetName(loop);
-                    row.Fields.Add(name, reader[loop]);
+                    row.Data.Add(name, reader[loop]);
                 }
 
                 data.Add(row);

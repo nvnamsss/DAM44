@@ -10,29 +10,27 @@ namespace DAM.Cores
     public class Database
     {
         public DbConnection Connection { get; }
-        public TableObject Students;
         public Dictionary<string, TableObject> Tables { get; }
 
-        public Database()
+        public Database(DbConnection connection)
         {
+            Connection = connection;
+
+            string command = "SHOW DATABASES";
             Tables = new Dictionary<string, TableObject>();
+            QueryData data = Connection.Query(command);
+            for (int loop = 0; loop < data.Affected; loop++)
+            {
+
+                foreach (var entry in data[loop].Data)
+                {
+                    TableObject table = new TableObject();
+                    table.Name = entry.Value.ToString();
+                    Tables.Add(table.Name, table);
+                }
+            }
+
         }
-
-        public IDbObject Sum<TSource>(IEnumerable<TSource> source)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDbObject Where()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-
+        
     }
 }

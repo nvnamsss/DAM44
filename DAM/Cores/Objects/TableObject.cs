@@ -86,10 +86,16 @@ namespace DAM.Cores.Objects
         {
             string query = Query.Select(this, row);
             QueryData data = Connection.Query(query);
-            List<RowObject> rows = new List<RowObject>(data.RowCount);
-            for (int loop = 0; loop < data.RowCount; loop++)
+            List<RowObject> rows = new List<RowObject>(data.Affected);
+            for (int loop = 0; loop < data.Affected; loop++)
             {
-                rows.Add(data[loop]);
+                RowObject r = new RowObject();
+                foreach (var entry in rows[loop].Data)
+                {
+                    r.Fields.Add(entry.Key, entry.Key);
+                }
+
+                rows.Add(r);
             }
 
             return rows;
@@ -114,6 +120,11 @@ namespace DAM.Cores.Objects
             table.Rows = new List<RowObject>(Rows);
 
             return table;
+        }
+
+        public override string ToString()
+        {
+            return Name == null ? Name : string.Empty;
         }
     }
 }

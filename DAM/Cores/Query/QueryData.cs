@@ -7,26 +7,26 @@ namespace DAM.Cores.Query
 {
     public class QueryData
     {
-        public int RowCount
+        public int Affected
         {
             get
             {
                 return _results.Count;
             }
         }
-        private List<RowObject> _results;
+        private List<DbObject> _results;
         //private Dictionary<string, List<object>> _results;
         public QueryData()
         {
-            _results = new List<RowObject>();
+            _results = new List<DbObject>();
             //_results = new Dictionary<string, List<object>>();
         }
 
-        public RowObject this[int index]
+        public DbObject this[int index]
         {
             get
             {
-                if (index > RowCount - 1 || index < 0)
+                if (index > Affected - 1 || index < 0)
                 {
                     return null;
                 }
@@ -35,7 +35,7 @@ namespace DAM.Cores.Query
             }
         }
 
-        public void Add(RowObject row)
+        public void Add(DbObject row)
         {
             _results.Add(row);
         }

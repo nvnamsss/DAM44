@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAM.Cores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -30,6 +31,8 @@ namespace DAM
             command.Connection = connection.connection;
 
             command.CommandText = "SELECT * FROM global_priv";
+            Database db = new Database(connection);
+            
             //var reader = command.ExecuteReader();
             //while (reader.Read())
             //{

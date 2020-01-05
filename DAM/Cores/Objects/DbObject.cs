@@ -13,6 +13,7 @@ namespace DAM.Cores.Objects
         public DbObject Parent { get; set; }
 
         public DbConnection Connection { get; set; }
+        public Dictionary<string, object> Data { get; set; } = new Dictionary<string, object>();
         protected QueryGenerator Query { get; set; }
 
         public abstract DbObject Clone();
@@ -23,5 +24,16 @@ namespace DAM.Cores.Objects
             return obj;
         }
 
+        public override string ToString()
+        {
+            string s = string.Empty;
+
+            foreach (var entry in Data)
+            {
+                s = s + entry.Value + ": " + entry.Key + Environment.NewLine;
+            }
+
+            return s;
+        }
     }
 }
