@@ -14,7 +14,7 @@ namespace DAM.Cores
         {
             try
             {
-                Command.Execute<T>(query, args);
+
             }
             catch (Exception)
             {
@@ -29,7 +29,7 @@ namespace DAM.Cores
         {
             try
             {
-                Command.Execute(query, args);
+
             }
             catch (Exception)
             {
