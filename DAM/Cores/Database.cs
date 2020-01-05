@@ -1,5 +1,5 @@
 ﻿using DAM.Cores.Connection;
-using DAM.Cores.DbObject;
+using DAM.Cores.Objects;
 using DAM.Cores.Query;
 using System;
 using System.Collections.Generic;
@@ -7,51 +7,30 @@ using System.Text;
 
 namespace DAM.Cores
 {
-    public class Database : IQuery
+    public class Database
     {
-        public IConnection Connection { get; }
-        public T Execute<T>(string query, params object[] args)
+        public DbConnection Connection { get; }
+        public Dictionary<string, TableObject> Tables { get; }
+
+        public Database(DbConnection connection)
         {
-            try
+            Connection = connection;
+
+            string command = "SHOW TABLES";
+            Tables = new Dictionary<string, TableObject>();
+            QueryData data = Connection.Query(command);
+            for (int loop = 0; loop < data.Affected; loop++)
             {
 
+                foreach (var entry in data[loop].Data)
+                {
+                    TableObject table = new TableObject();
+                    table.Name = entry.Value.ToString();
+                    Tables.Add(table.Name, table);
+                }
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
-
-            throw new NotImplementedException();
         }
-
-        public int Execute(string query, params object[] args)
-        {
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            throw new NotImplementedException();
-        }
-
-        public IDbObject Sum<TSource>(IEnumerable<TSource> source)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDbObject Where()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDbObject Where<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

@@ -9,6 +9,13 @@ namespace DAM.MySQL
 {
     public class MySQLConnection : DbConnection
     {
+        public MySqlConnection connection
+        {
+            get
+            {
+                return _connection as MySqlConnection;
+            }
+        }
         public MySQLConnection(string server, string username, string password, string database)
         {
             connectionString = new StringBuilder();
@@ -19,6 +26,7 @@ namespace DAM.MySQL
             _connection = new MySqlConnection(connectionString.ToString());
             _command = new MySqlCommand();
             _command.Connection = _connection;
+            InitializeCallback();
         }
 
         public override void Connect(string url)
@@ -50,5 +58,6 @@ namespace DAM.MySQL
         {
             _connection.Close();
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAM.Cores.Query;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace DAM.Cores.Connection
         protected StringBuilder connectionString;
         protected System.Data.Common.DbConnection _connection;
         protected System.Data.Common.DbCommand _command;
-
+        protected System.Data.Common.DbTransaction _transaction;
         protected virtual void OnConnectInvoke()
         {
             OnConnect?.Invoke(this);
@@ -49,6 +50,63 @@ namespace DAM.Cores.Connection
         {
             OnDisconnect?.Invoke(this);
         }
+
+        protected virtual void InitializeCallback()
+        {
+            _connection.StateChange += (sender, e) =>
+            {
+                switch (e.CurrentState)
+                {
+                    case System.Data.ConnectionState.Broken:
+                        break;
+                    case System.Data.ConnectionState.Closed:
+                        ConnectionState = ConnectionState.Closed;
+                        break;
+                    case System.Data.ConnectionState.Connecting:
+                        ConnectionState = ConnectionState.Connecting;
+                        break;
+                    case System.Data.ConnectionState.Executing:
+                        break;
+                    case System.Data.ConnectionState.Fetching:
+                        break;
+                    case System.Data.ConnectionState.Open:
+                        ConnectionState = ConnectionState.Connected;
+                        break;
+                    default:
+                        break;
+                }
+            };
+        }
+
+        public virtual QueryData Query(string query)
+        {
+            QueryData data = new QueryData();
+            _command.CommandText = query;
+            System.Data.Common.DbDataReader reader = _command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Objects.DbObject row = new Objects.RowObject();
+                for (int loop = 0; loop < reader.FieldCount; loop++)
+                {
+                    string name = reader.GetName(loop);
+                    row.Data.Add(name, reader[loop]);
+                }
+
+                data.Add(row);
+            }
+
+            reader.Close();
+            return data;
+        }
+
+        public virtual int Execute(string command)
+        {
+            _command.CommandText = command;
+            return _command.ExecuteNonQuery();
+        }
+
+
         //protected virtual void SetState(ConnectionState state)
         //{
         //    if (state != ConnectionState)

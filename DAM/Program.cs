@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAM.Cores;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -22,18 +24,26 @@ namespace DAM
             string username = "root";
             string password = "";
             string database = "mysql";
+
             MySQL.MySQLConnection connection = new MySQL.MySQLConnection(server, username, password, database);
             connection.Connect();
             MySql.Data.MySqlClient.MySqlCommand command = new MySql.Data.MySqlClient.MySqlCommand();
-            command.Connection = connection._connection;    
-            command.CommandText = "SELECT * FROM db";
-            var reader = command.ExecuteReader();
+            command.Connection = connection.connection;
 
-            while (reader.Read())
-            {
-                Console.WriteLine(reader[0] + " -- " + reader[1]);
-            }
-            reader.Close();
+            command.CommandText = "SELECT * FROM global_priv";
+
+            TestDatabase db = new TestDatabase();
+            db.Test(connection);
+            TestTable table = new TestTable();
+            //table.TestInsert(connection);
+            table.TestUpdate(connection);
+            //table.TestDelete(connection);
+            table.TestSelect(connection);
+            table.TestDeserialize(connection);
+            //row.name = "abc";
+            //row.host = "local";
+            //row.port = 3000;
+            //row.Update();
             QuitEvent.WaitOne();
         }
 

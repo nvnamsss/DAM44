@@ -1,4 +1,4 @@
-﻿using DAM.Cores.DbObject;
+﻿using DAM.Cores.Objects;
 using DAM.Cores.Query;
 using System;
 using System.Collections.Generic;
