@@ -26,6 +26,7 @@ namespace DAM.MySQL
             _connection = new MySqlConnection(connectionString.ToString());
             _command = new MySqlCommand();
             _command.Connection = _connection;
+            InitializeCallback();
         }
 
         public override void Connect(string url)
@@ -57,5 +58,6 @@ namespace DAM.MySQL
         {
             _connection.Close();
         }
+
     }
 }

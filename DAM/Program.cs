@@ -30,28 +30,30 @@ namespace DAM
             command.Connection = connection.connection;
 
             command.CommandText = "SELECT * FROM global_priv";
-            var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                string s = string.Empty;
-                s = s + reader["host"] + "-";
-                s = s + reader["User"];
-                var e = reader.GetEnumerator();
-                //foreach (var entry in reader)
-                //{
-                //    Dictionary<string, string> dic = entry as Dictionary<string, string>;
+            //var reader = command.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    string s = string.Empty;
+            //    s = s + reader["host"] + "-";
+            //    s = s + reader["User"];
+            //    var e = reader.GetEnumerator();
+            //    //foreach (var entry in reader)
+            //    //{
+            //    //    Dictionary<string, string> dic = entry as Dictionary<string, string>;
 
-                //}
-                for (int loop = 0; loop < reader.FieldCount; loop++)
-                {
-                    s = s + reader.GetName(loop) + ":" + reader[loop] + "-";
-                }
+            //    //}
+            //    for (int loop = 0; loop < reader.FieldCount; loop++)
+            //    {
+            //        s = s + reader.GetName(loop) + ":" + reader[loop] + "-";
+            //    }
 
-                Console.WriteLine(s);
-            }
-            reader.Close();
-            TestRow row = new TestRow();
-            row.Test(connection);
+            //    Console.WriteLine(s);
+            //}
+            //reader.Close();
+            //TestRow row = new TestRow();
+            //row.Test(connection);
+            TestTable table = new TestTable();
+            table.TestUpdate(connection);
             //row.name = "abc";
             //row.host = "local";
             //row.port = 3000;

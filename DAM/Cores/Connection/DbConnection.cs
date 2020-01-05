@@ -51,6 +51,33 @@ namespace DAM.Cores.Connection
             OnDisconnect?.Invoke(this);
         }
 
+        protected virtual void InitializeCallback()
+        {
+            _connection.StateChange += (sender, e) =>
+            {
+                switch (e.CurrentState)
+                {
+                    case System.Data.ConnectionState.Broken:
+                        break;
+                    case System.Data.ConnectionState.Closed:
+                        ConnectionState = ConnectionState.Closed;
+                        break;
+                    case System.Data.ConnectionState.Connecting:
+                        ConnectionState = ConnectionState.Connecting;
+                        break;
+                    case System.Data.ConnectionState.Executing:
+                        break;
+                    case System.Data.ConnectionState.Fetching:
+                        break;
+                    case System.Data.ConnectionState.Open:
+                        ConnectionState = ConnectionState.Connected;
+                        break;
+                    default:
+                        break;
+                }
+            };
+        }
+
         public virtual QueryData Query(string query)
         {
             QueryData data = new QueryData();

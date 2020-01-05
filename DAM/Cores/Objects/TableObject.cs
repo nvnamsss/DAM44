@@ -10,6 +10,7 @@ namespace DAM.Cores.Objects
         public TableObject()
         {
             Rows = new List<RowObject>();
+            Query = Cores.Query.TableQuery.Instance;
         }
 
         public void Update<T>(T originalObj, T newObj)
@@ -18,7 +19,7 @@ namespace DAM.Cores.Objects
             Dictionary<string, object> originalFields = RowObject.GetFields(originalObj);
             Dictionary<string, object> newFields = RowObject.GetFields(newObj);
 
-            //update += "UPDATE " + Parent.Name + " ";
+            update += "UPDATE " + Name + " ";
             update += "SET ";
             foreach (var entry in newFields)
             {
@@ -37,6 +38,24 @@ namespace DAM.Cores.Objects
             Connection.Execute(update);
         }
 
+        public int Update(RowObject original, RowObject current)
+        {
+            if (Connection == null)
+            {
+                throw new Exception("Connection is null");
+            }
+
+            if (Connection.ConnectionState == Cores.Connection.ConnectionState.Closed)
+            {
+                throw new Exception("Connection is closed");
+            }
+
+            string update = Query.Update(this, original, current);
+            int affected = Connection.Execute(update);
+
+            return affected;
+        }
+
 
         public int Insert(RowObject row)
         {
@@ -49,29 +68,7 @@ namespace DAM.Cores.Objects
             {
                 throw new Exception("Connection is closed");
             }
-
-            StringBuilder command = new StringBuilder();
-            string fields = string.Empty;
-            string values = string.Empty;
-            foreach (var entry in row.Fields)
-            {
-                fields += entry.Key + ",";
-                if (entry.Value is string)
-                {
-                    values += "\"" + entry.Value + "\"" + ",";
-                }
-                else
-                {
-                    values += entry.Value + ",";
-                }
-            }
-            fields = fields.Remove(fields.LastIndexOf(","));
-            values = values.Remove(values.LastIndexOf(","));
-            command.Append("INSERT INTO ");
-            command.Append(Name);
-            command.AppendLine("(" + fields + ") ");
-            command.Append("VALUES (" + values + ")");
-            Console.WriteLine("Command:"+command);
+            string command = Query.Insert(this, row);
 
             int affected = Connection.Execute(command.ToString());
 
@@ -97,5 +94,9 @@ namespace DAM.Cores.Objects
             return affected;
         }
 
+        public override DbObject Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

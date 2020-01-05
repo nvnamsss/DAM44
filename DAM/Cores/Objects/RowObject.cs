@@ -87,5 +87,12 @@ namespace DAM.Cores.Objects
 
             return t;
         }
+
+        public override DbObject Clone()
+        {
+            RowObject row = (RowObject)MemberwiseClone();
+            row.Fields = new Dictionary<string, object>(Fields);
+            return row;
+        }
     }
 }
