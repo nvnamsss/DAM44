@@ -11,7 +11,27 @@ namespace DAM.Cores.Query
 
         public override string Delete(DbObject target, DbObject source)
         {
-            throw new NotImplementedException();
+            StringBuilder command = new StringBuilder();
+            RowObject row = source as RowObject;
+            string where = string.Empty;
+
+            foreach (var entry in row.Fields)
+            {
+                if (entry.Value is string)
+                {
+                    where += entry.Key + "=" + "\"" + entry.Value + "\"" + " AND ";
+                }
+                else
+                {
+                    where += entry.Key + "=" + entry.Value + " AND ";
+                }
+            }
+            where = where.Remove(where.LastIndexOf(" AND "));
+
+            command.AppendLine("DELETE FROM " + target.Name);
+            command.AppendLine("WHERE " + where);
+
+            return command.ToString();
         }
 
         public override string Insert(DbObject target, DbObject source)
@@ -45,7 +65,27 @@ namespace DAM.Cores.Query
 
         public override string Select(DbObject target, DbObject source)
         {
-            throw new NotImplementedException();
+            StringBuilder command = new StringBuilder();
+            RowObject row = source as RowObject;
+            string where = string.Empty;
+
+            foreach (var entry in row.Fields)
+            {
+                if (entry.Value is string)
+                {
+                    where += entry.Key + "=" + "\"" + entry.Value + "\"" + " AND ";
+                }
+                else
+                {
+                    where += entry.Key + "=" + entry.Value + " AND ";
+                }
+            }
+            where = where.Remove(where.LastIndexOf(" AND "));
+
+            command.AppendLine("SELECT * FROM " + target.Name);
+            command.AppendLine("WHERE " + where);
+
+            return command.ToString();
         }
 
         public override string Update(DbObject target, DbObject original, DbObject current)
@@ -85,8 +125,9 @@ namespace DAM.Cores.Query
             command.AppendLine("UPDATE " + target.Name);
             command.AppendLine("SET " + set);
             command.AppendLine("WHERE " + where);
-            Console.WriteLine(command.ToString());
+
             return command.ToString();
         }
+
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAM.Cores.Objects
 {
-    public abstract class DbObject : IDbObject, IDbPrototype
+    public abstract class DbObject : IDbObject, IDbClone
     {
         public string Name { get; set; }
         public DbObject Parent { get; set; }

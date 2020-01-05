@@ -53,7 +53,10 @@ namespace DAM
             //TestRow row = new TestRow();
             //row.Test(connection);
             TestTable table = new TestTable();
+            //table.TestInsert(connection);
             table.TestUpdate(connection);
+            //table.TestDelete(connection);
+            table.TestSelect(connection);
             //row.name = "abc";
             //row.host = "local";
             //row.port = 3000;

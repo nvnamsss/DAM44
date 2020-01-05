@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAM.Cores.Query;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace DAM.Cores.Objects
 {
     public class TableObject : DbObject
     {
-        protected List<RowObject> Rows { get; }
+        protected List<RowObject> Rows { get; set; }
         public TableObject()
         {
             Rows = new List<RowObject>();
@@ -81,14 +82,27 @@ namespace DAM.Cores.Objects
             return affected;
         }
 
+        public IEnumerable<RowObject> Select(RowObject row)
+        {
+            string query = Query.Select(this, row);
+            QueryData data = Connection.Query(query);
+            List<RowObject> rows = new List<RowObject>(data.RowCount);
+            for (int loop = 0; loop < data.RowCount; loop++)
+            {
+                rows.Add(data[loop]);
+            }
+
+            return rows;
+        }
+
         public int Delete(RowObject row)
         {
-            StringBuilder command = new StringBuilder();
-            int affected = Connection.Execute(command.ToString());
+            string command = Query.Delete(this, row);
+            int affected = Connection.Execute(command);
 
             if (affected > 0)
             {
-                Rows.Remove(row);
+                
             }
 
             return affected;
@@ -96,7 +110,10 @@ namespace DAM.Cores.Objects
 
         public override DbObject Clone()
         {
-            throw new NotImplementedException();
+            TableObject table = (TableObject)MemberwiseClone();
+            table.Rows = new List<RowObject>(Rows);
+
+            return table;
         }
     }
 }

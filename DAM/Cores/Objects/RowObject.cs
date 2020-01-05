@@ -7,6 +7,9 @@ namespace DAM.Cores.Objects
 {
     public class RowObject : DbObject
     {
+        /// <summary>
+        /// Determine fields and values of a row
+        /// </summary>
         public Dictionary<string, object> Fields { get; set; }
         public RowObject()
         {
@@ -93,6 +96,18 @@ namespace DAM.Cores.Objects
             RowObject row = (RowObject)MemberwiseClone();
             row.Fields = new Dictionary<string, object>(Fields);
             return row;
+        }
+
+        public override string ToString()
+        {
+            string s = string.Empty;
+
+            foreach (var entry in Fields)
+            {
+                s = s + entry.Key + ": " + entry.Value + Environment.NewLine;
+            }
+
+            return s;
         }
     }
 }
